@@ -10,7 +10,6 @@ from sam2.sam2_image_predictor import SAM2ImagePredictor
 torch.autocast(device_type="cuda", dtype=torch.bfloat16).__enter__()
 
 # Load image
-
 image_path = r"sample_image.jpg" # path to image
 mask_path = r"sample_mask.png" # path to mask, the mask will define the image region to segment
 
@@ -33,8 +32,8 @@ def get_points(mask,num_points): # Sample points inside the input mask
             yx = np.array(coords[np.random.randint(len(coords))])
             points.append([[yx[1], yx[0]]])
         return np.array(points)
-input_points = get_points(mask,num_samples)
 # read image and sample points
+input_points = get_points(mask,num_samples)
 
 
 # Load model you need to have pretrained model already made
