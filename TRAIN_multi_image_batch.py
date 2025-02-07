@@ -6,15 +6,12 @@ import numpy as np
 import torch
 import cv2
 import os
-
 from torch.onnx.symbolic_opset11 import hstack
-
 from sam2.build_sam import build_sam2
 from sam2.sam2_image_predictor import SAM2ImagePredictor
 
 # Read data
-
-data_dir=r"LabPicsV1//" # Path to dataset (LabPics 1)
+data_dir=r"/mnt/data/segmentation/LabPicsV1/" # Path to dataset (LabPics 1)
 data=[] # list of files in dataset
 for ff, name in enumerate(os.listdir(data_dir+"Simple/Train/Image/")):  # go over all folder annotation
     data.append({"image":data_dir+"Simple/Train/Image/"+name,"annotation":data_dir+"Simple/Train/Instance/"+name[:-4]+".png"})
