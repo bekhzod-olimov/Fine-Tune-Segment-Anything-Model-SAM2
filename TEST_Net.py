@@ -86,8 +86,3 @@ save_dir = "results"
 os.makedirs(save_dir, exist_ok=True)
 cv2.imwrite(f"{save_dir}/pred_mask.png",rgb_image)
 cv2.imwrite(f"{save_dir}/pred_mix_mask.png",(rgb_image/2+image/2).astype(np.uint8))
-
-# cv2.imshow("annotation",rgb_image)
-# cv2.imshow("mix",(rgb_image/2+image/2).astype(np.uint8))
-# cv2.imshow("image",image)
-# cv2.waitKey()
