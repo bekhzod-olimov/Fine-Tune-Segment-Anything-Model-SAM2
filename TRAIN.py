@@ -16,8 +16,6 @@ from sam2.build_sam import build_sam2
 from sam2.sam2_image_predictor import SAM2ImagePredictor
 
 # Read data
-
-# data_dir=r"LabPicsV1//" # Path to dataset (LabPics 1)
 data_dir=r"/mnt/data/segmentation/LabPicsV1/" # Path to dataset (LabPics 1)
 
 data=[] # list of files in dataset
