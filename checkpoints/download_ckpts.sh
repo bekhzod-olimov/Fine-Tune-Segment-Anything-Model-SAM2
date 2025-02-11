@@ -12,7 +12,7 @@ save_dir="${root_dir}/checkpoints"
 cd ../
 mkdir -p ${root_dir}
 mkdir -p ${save_dir}
-cd fine-tune-train_segment_anything_2_in_60_lines_of_code
+cd Fine-Tune-Segment-Anything-Model-SAM2
 
 # Download each of the four checkpoints using wget
 echo "Downloading sam2_hiera_tiny.pt checkpoint..."
