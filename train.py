@@ -6,10 +6,10 @@ import argparse
 from sam2.build_sam import build_sam2
 from sam2.sam2_image_predictor import SAM2ImagePredictor
 
-# SAM2Trainer klassi modelni o'qitish uchun ishlatiladi.
+# SAM2Trainer klassi SAM2 modelning train qilish uchun ishlatiladi.
 class SAM2Trainer:
     def __init__(self, data_dir, checkpoint_path, model_cfg, device, model_save_dir):
-        # Modelni va ma'lumotlar joylashgan katalogini aniqlash
+        # Modelni va ma'lumotlar joylashgan papkani belgilash
         self.data_dir = data_dir
         self.device = device
         self.model_save_dir = model_save_dir
@@ -18,21 +18,23 @@ class SAM2Trainer:
         self.model = build_sam2(model_cfg, checkpoint_path, device=self.device)
         self.predictor = SAM2ImagePredictor(self.model)
 
-        # Model qismlarini o'qitishga yo'naltirish
+        # Model qismlarini trainga tayyorlash yo'naltirish
         self.predictor.model.sam_mask_decoder.train(True)
         self.predictor.model.sam_prompt_encoder.train(True)
-        # Quyidagi qatordagi sharhni olib tashlasangiz, rasm kodlovchini ham o'qitishingiz mumkin
+        # Quyidagi commentni olib tashlasangiz, encoderni ham train qilish mumkin
         # self.predictor.model.image_encoder.train(True)
 
-        # Optimallashtiruvchi va aralash aniqlik uchun skalerni sozlash
+        # Optimizer va scalerni belgilash
         self.optimizer = torch.optim.AdamW(params=self.predictor.model.parameters(), lr=1e-5, weight_decay=4e-5)
         self.scaler = torch.cuda.amp.GradScaler()
 
-        # Ma'lumotlar to'plamini yuklash
+        # Ma'lumotlarni yuklab olish
         self.data = self._load_data()
 
     def _load_data(self):
+        
         """Ma'lumotlar to'plamining yo'llarini yuklash."""
+        
         data = []
         for name in os.listdir(os.path.join(self.data_dir, "Simple/Train/Image/")):
             data.append({
